@@ -148,7 +148,7 @@ public class InstructionMemoryDump extends AbstractToolAndApplication {
         panel.add(dumpLogFilename);
 
         logSuccess = new JLabel("");
-        logSuccess.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        logSuccess.setFont(new Font("Monospaced", Font.PLAIN, 16));
         logSuccess.setFocusable(false);
         logSuccess.setBackground(panel.getBackground());
         panel.add(logSuccess);

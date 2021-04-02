@@ -68,7 +68,7 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
     private Hashtable<Integer, ModifiedCode> executeMods;   // key is table model row, value is original code, basic, source.
     private Container contentPane;
     private TextTableModel tableModel;
-    private Font tableCellFont = new Font("Monospaced", Font.PLAIN, 12);
+    private Font tableCellFont = new Font("Monospaced", Font.PLAIN, 16);
     private boolean codeHighlighting;
     private boolean breakpointsEnabled;  // Added 31 Dec 2009
     private int highlightAddress;
@@ -167,9 +167,9 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
         table.getColumnModel().getColumn(CODE_COLUMN).setMinWidth(80);
 
         table.getColumnModel().getColumn(BREAK_COLUMN).setMaxWidth(50);
-        table.getColumnModel().getColumn(ADDRESS_COLUMN).setMaxWidth(90);
-        table.getColumnModel().getColumn(CODE_COLUMN).setMaxWidth(90);
-        table.getColumnModel().getColumn(BASIC_COLUMN).setMaxWidth(200);
+        table.getColumnModel().getColumn(ADDRESS_COLUMN).setMaxWidth(160);
+        table.getColumnModel().getColumn(CODE_COLUMN).setMaxWidth(160);
+        table.getColumnModel().getColumn(BASIC_COLUMN).setMaxWidth(300);
 
         table.getColumnModel().getColumn(BREAK_COLUMN).setPreferredWidth(40);
         table.getColumnModel().getColumn(ADDRESS_COLUMN).setPreferredWidth(80);

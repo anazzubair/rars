@@ -1,5 +1,6 @@
 package rars.venus;
 
+import com.bulenkov.darcula.DarculaLaf;
 import rars.Globals;
 import rars.Settings;
 import rars.riscv.InstructionSet;
@@ -13,9 +14,12 @@ import rars.venus.run.*;
 import rars.venus.settings.*;
 
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.plaf.basic.BasicLookAndFeel;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
+import java.util.Enumeration;
 
 /*
 Copyright (c) 2003-2013,  Pete Sanderson and Kenneth Vollmar
@@ -121,6 +125,15 @@ public class VenusUI extends JFrame {
 
     public VenusUI(String s) {
         super(s);
+
+        //this.initializeFontSize();
+        BasicLookAndFeel darculaLookAndFeel = new DarculaLaf();
+        try {
+            UIManager.setLookAndFeel(darculaLookAndFeel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         mainUI = this;
         Globals.setGui(this);
         this.editor = new Editor(this);
@@ -236,6 +249,29 @@ public class VenusUI extends JFrame {
 
         this.pack();
         this.setVisible(true);
+    }
+
+    public void initializeFontSize() {
+        String fontSizeParam = "16"; //System.getProperty("myapp.fontSize");
+        if (fontSizeParam != null) {
+            float multiplier = Integer.parseInt(fontSizeParam) / 100.0f;
+            UIDefaults defaults = UIManager.getDefaults();
+            int i = 0;
+            for (Enumeration e = defaults.keys(); e.hasMoreElements(); i++) {
+                Object key = e.nextElement();
+                Object value = defaults.get(key);
+                if (value instanceof Font) {
+                    Font font = (Font) value;
+                    //int newSize = Math.round(font.getSize() * multiplier);
+                    int newSize = 16;
+                    if (value instanceof FontUIResource) {
+                        defaults.put(key, new FontUIResource(font.getName(), font.getStyle(), newSize));
+                    } else {
+                        defaults.put(key, new Font(font.getName(), font.getStyle(), newSize));
+                    }
+                }
+            }
+        }
     }
 
 
