@@ -158,6 +158,7 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
             tableModel.fireTableDataChanged();// initialize listener
         }
         table = new MyTippedJTable(tableModel);
+        table.setBackground(new Color(51,51,51));
 
         // prevents cells in row from being highlighted when user clicks on breakpoint checkbox
         table.setRowSelectionAllowed(false);
