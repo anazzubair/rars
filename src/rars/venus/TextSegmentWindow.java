@@ -8,6 +8,7 @@ import rars.simulator.Simulator;
 import rars.simulator.SimulatorNotice;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.event.*;
 import javax.swing.table.*;
 import java.awt.*;
@@ -160,6 +161,7 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
         table = new MyTippedJTable(tableModel);
         table.setBackground(new Color(51,51,51));
 
+
         // prevents cells in row from being highlighted when user clicks on breakpoint checkbox
         table.setRowSelectionAllowed(false);
 
@@ -173,14 +175,29 @@ public class TextSegmentWindow extends JInternalFrame implements Observer {
         table.getColumnModel().getColumn(BASIC_COLUMN).setMaxWidth(300);
 
         table.getColumnModel().getColumn(BREAK_COLUMN).setPreferredWidth(40);
-        table.getColumnModel().getColumn(ADDRESS_COLUMN).setPreferredWidth(80);
-        table.getColumnModel().getColumn(CODE_COLUMN).setPreferredWidth(80);
-        table.getColumnModel().getColumn(BASIC_COLUMN).setPreferredWidth(160);
+        table.getColumnModel().getColumn(ADDRESS_COLUMN).setPreferredWidth(120);
+        table.getColumnModel().getColumn(CODE_COLUMN).setPreferredWidth(120);
+        table.getColumnModel().getColumn(BASIC_COLUMN).setPreferredWidth(220);
         table.getColumnModel().getColumn(SOURCE_COLUMN).setPreferredWidth(280);
 
+
         CodeCellRenderer codeStepHighlighter = new CodeCellRenderer();
-        table.getColumnModel().getColumn(BASIC_COLUMN).setCellRenderer(codeStepHighlighter);
-        table.getColumnModel().getColumn(SOURCE_COLUMN).setCellRenderer(codeStepHighlighter);
+
+        CodeCellRenderer leftPaddedCodeStepHighlighter = new CodeCellRenderer() {
+            Border padding = BorderFactory.createEmptyBorder(0, 10, 0, 0);
+            @Override
+            public Component getTableCellRendererComponent(JTable table,
+                                                           Object value, boolean isSelected, boolean hasFocus,
+                                                           int row, int column) {
+                super.getTableCellRendererComponent(table, value, isSelected, hasFocus,
+                        row, column);
+                setBorder(BorderFactory.createCompoundBorder(getBorder(), padding));
+                return this;
+            }
+        };
+
+        table.getColumnModel().getColumn(BASIC_COLUMN).setCellRenderer(leftPaddedCodeStepHighlighter);
+        table.getColumnModel().getColumn(SOURCE_COLUMN).setCellRenderer(leftPaddedCodeStepHighlighter);
         // to render String right-justified in mono font
         table.getColumnModel().getColumn(ADDRESS_COLUMN).setCellRenderer(new MonoRightCellRenderer());
         table.getColumnModel().getColumn(CODE_COLUMN).setCellRenderer(new MachineCodeCellRenderer());
