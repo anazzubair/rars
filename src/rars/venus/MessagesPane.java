@@ -83,6 +83,10 @@ public class MessagesPane extends JTabbedPane {
         assemble.setFont(monoFont);
         run.setFont(monoFont);
 
+        // Set both text area background to dark
+        assemble.setBackground(new Color(51,51, 51));
+        run.setBackground(new Color(51,51,51));
+
         JButton assembleTabClearButton = new JButton("Clear");
         assembleTabClearButton.setToolTipText("Clear the Messages area");
         assembleTabClearButton.addActionListener(
