@@ -83,7 +83,8 @@ public class DataSegmentWindow extends JInternalFrame implements Observer {
 
     private boolean addressHighlighting = false;
     private boolean asciiDisplay = false;
-    private int addressRow, addressColumn, addressRowFirstAddress;
+    private int addressRow, addressColumn;
+    private long addressRowFirstAddress;
     private Settings settings;
 
     private int firstAddress;
@@ -992,7 +993,7 @@ public class DataSegmentWindow extends JInternalFrame implements Observer {
                     isSelected, hasFocus, row, column);
 
             cell.setHorizontalAlignment(SwingConstants.RIGHT);
-            int rowFirstAddress = Binary.stringToInt(table.getValueAt(row, ADDRESS_COLUMN).toString());
+            long rowFirstAddress = Binary.stringToLong(table.getValueAt(row, ADDRESS_COLUMN).toString());
             if (settings.getBooleanSetting(Settings.Bool.DATA_SEGMENT_HIGHLIGHTING) && addressHighlighting &&
                     rowFirstAddress == addressRowFirstAddress && column == addressColumn) {
                 cell.setBackground(settings.getColorSettingByPosition(Settings.DATASEGMENT_HIGHLIGHT_BACKGROUND));
